@@ -15,7 +15,7 @@ else if(errorOcured)
 else
 {
 	<h2>Temperatura</h2>
-	
+
 }
 
 
@@ -24,11 +24,11 @@ else
 {
 	<div>
 		<canvas id="myChart"></canvas>
-		<p>@foreach(var item in temperatureData)
+		<ul>@foreach(var item in temperatureData)
 			{
-				@item.Value;
+				<li> @item.Value  @ParseData(item.EnqueuedTime)</li>
 			}
-		</p>
+		</ul>
 	</div>
 }
 
@@ -39,26 +39,26 @@ else
 <script>
 	const ctx = document.getElementById('myChart');
 
-	function LoadData(chart,label,newData)
+	function LoadData(label,newData)
 	{
-		chart.data.labels.push(label);
-		chart.data.datasets.forEach((dataset) => {
-		dataset.data.push(newData);
-		});
-		chart.update();
+	chart.data.labels.push(label);
+	chart.data.datasets.forEach((dataset) => {
+	dataset.data.push(newData);
+	});
+	chart.update();
 	}
 
 	new Chart(ctx, {
-	  type: 'line'
-	  },
-	  options: {
-		responsive:true,
-		scales: {
-		  y: {
-			beginAtZero: true
-		  }
-		}
-	  }
+	type: 'line'
+	},
+	options: {
+	responsive:true,
+	scales: {
+	y: {
+	beginAtZero: true
+	}
+	}
+	}
 	});
 </script>
 
@@ -80,4 +80,66 @@ else
 			errorOcured = true;
 		}
 	}
+	public async Task LoadData(){
+		try
+		{
+			temperatureData = await ApiService.GetTemperatureDataAsync();
+			lockStateData = await ApiService.GetLockStateDataAsync();
+		}
+		catch (Exception)
+		{
+			errorOcured = true;
+		}
+	}
+
+	public string ParseData(DateTime date)
+	{
+		string day,month,hour,minute,second;
+
+		if (date.Day < 10)
+		{
+			day = "0"+date.Day.ToString();
+		}
+		else{
+			day = date.Day.ToString();
+		}
+
+		if (date.Month < 10)
+		{
+			month = "0" + date.Month.ToString();
+		}
+		else
+		{
+			month = date.Month.ToString();
+		}
+
+		if (date.Hour < 10)
+		{
+			hour = "0" + date.Hour.ToString();
+		}
+		else
+		{
+			hour = date.Hour.ToString();
+		}
+
+		if (date.Minute < 10)
+		{
+			minute = "0" + date.Minute.ToString();
+		}
+		else
+		{
+			minute = date.Minute.ToString();
+		}
+
+		if (date.Second < 10)
+		{
+			second = "0" + date.Second.ToString();
+		}
+		else
+		{
+			second = date.Second.ToString();
+		}
+		return $"{date.Year}-{month}-{day} {hour}:{minute}:{second}";
+	}
+	
 }

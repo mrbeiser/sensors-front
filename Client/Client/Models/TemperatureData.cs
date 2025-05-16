@@ -6,7 +6,6 @@ namespace Client.Models
     {
         [JsonPropertyName("value")]
         public double Value { get; set; }
-
         [JsonPropertyName("sensorId")]
         public string SensorId { get; set; }
         [JsonPropertyName("name")]
