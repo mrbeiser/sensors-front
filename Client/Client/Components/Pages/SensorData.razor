@@ -1,0 +1,83 @@
+﻿@page "/sensordata"
+@using Client.Models
+@using Client.Services
+<h1>Sensor data</h1>
+@inject ApiService ApiService
+
+@if(temperatureData==null && lockStateData==null && !errorOcured)
+{
+	<p>Ładowanie danych</p>
+}
+else if(errorOcured)
+{
+	<p class="text-danger">Wystąpił błąd</p>
+}
+else
+{
+	<h2>Temperatura</h2>
+	
+}
+
+
+
+@if(temperatureData != null && temperatureData.Any())
+{
+	<div>
+		<canvas id="myChart"></canvas>
+		<p>@foreach(var item in temperatureData)
+			{
+				@item.Value;
+			}
+		</p>
+	</div>
+}
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+	const ctx = document.getElementById('myChart');
+
+	function LoadData(chart,label,newData)
+	{
+		chart.data.labels.push(label);
+		chart.data.datasets.forEach((dataset) => {
+		dataset.data.push(newData);
+		});
+		chart.update();
+	}
+
+	new Chart(ctx, {
+	  type: 'line'
+	  },
+	  options: {
+		responsive:true,
+		scales: {
+		  y: {
+			beginAtZero: true
+		  }
+		}
+	  }
+	});
+</script>
+
+
+@code {
+	private List<TemperatureData>? temperatureData;
+	private LockStateData? lockStateData;
+	private bool errorOcured = false;
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			temperatureData = await ApiService.GetTemperatureDataAsync();
+			lockStateData = await ApiService.GetLockStateDataAsync();
+		}
+		catch(Exception)
+		{
+			errorOcured = true;
+		}
+	}
+}

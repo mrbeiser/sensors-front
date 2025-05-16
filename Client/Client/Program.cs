@@ -1,4 +1,5 @@
 using Client.Components;
+using Client.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-var app = builder.Build();
+builder.Services.AddHttpClient("SensorAPI", client =>
+{
+    client.BaseAddress = new Uri("https://my-wonderful-api-acgvdvaaa5d4b9ez.northeurope-01.azurewebsites.net/api/sensor/");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
 
+builder.Services.AddScoped<ApiService>();
+
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -15,6 +23,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 
