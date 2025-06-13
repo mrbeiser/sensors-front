@@ -1,0 +1,195 @@
+﻿@page "/sensordata"
+@using Client.Models
+@using Client.Services
+<h1>Sensor data</h1>
+@inject ApiService ApiService
+@inject IJSRuntime JS
+@rendermode InteractiveServer
+@if(temperatureData==null && lockStateData==null && !errorOcured)
+{
+	<p>Ładowanie danych</p>
+}
+else if(errorOcured)
+{
+	<p class="text-danger">Wystąpił błąd</p>
+}
+else
+{
+	<h2>Temperatura</h2>
+
+}
+
+<style>
+	.temperature-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 0.95rem;
+	}
+
+	.temperature-table th, .temperature-table td {
+	border: 1px solid #ddd;
+	padding: 12px 15px;
+	text-align: left;
+	}
+
+	.temperature-table thead {
+	background-color: #f4f4f4;
+	color: #333;
+	}
+
+	.temperature-table tbody tr:nth-child(even) {
+	background-color: #f9f9f9;
+	}
+
+	.temperature-table tbody tr:hover {
+	background-color: #eef5ff;
+	cursor: pointer;
+	}
+
+	.temperature-table th {
+	background-color: #0078d4;
+	color: white;
+	}
+</style>
+
+<canvas id="myChart"></canvas>
+@if(temperatureData != null && temperatureData.Any())
+{
+	<div>
+
+		<table class="temperature-table">
+			<thead>
+				<tr>
+					<th>Value</th>
+					<th>Sensor ID</th>
+					<th>Name</th>
+					<th>Enqueued Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in temperatureData)
+				{
+					<tr>
+						<td class="arrayValues">@item.Value</td>
+						<td>@item.SensorId</td>
+						<td>@item.Name</td>
+						<td>@item.EnqueuedTime</td>
+					</tr>
+
+				}
+			</tbody>
+		</table>
+
+	</div>
+}
+
+
+
+
+
+@code {
+	private List<TemperatureData>? temperatureData;
+	private LockStateData? lockStateData;
+	private bool errorOcured = false;
+
+	private bool chartInitialized = false;
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			temperatureData = await ApiService.GetTemperatureDataAsync();
+			lockStateData = await ApiService.GetLockStateDataAsync();
+
+
+			var labels = temperatureData?.Select(t => t.EnqueuedTime.ToString("HH:mm:ss")).ToArray();
+			var values = temperatureData?.Select(t => t.Value).ToArray();
+		
+		}
+		catch (Exception)
+		{
+			Console.WriteLine("tragedia");
+			errorOcured = true;
+		}
+
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (!firstRender && temperatureData != null && temperatureData.Any())
+		{
+			var sensor1Data = temperatureData
+				.Where(t => t.SensorId == "nax_temperature_sensor_1")
+				.OrderBy(t => t.EnqueuedTime)
+				.ToList();
+
+			var sensor2Data = temperatureData
+				.Where(t => t.SensorId == "nax_temperature_sensor_2")
+				.OrderBy(t => t.EnqueuedTime)
+				.ToList();
+
+			var labels1 = sensor1Data.Select(t => t.EnqueuedTime.ToString("HH:mm:ss")).ToArray();
+			var values1 = sensor1Data.Select(t => t.Value).ToArray();
+
+			var labels2 = sensor2Data.Select(t => t.EnqueuedTime.ToString("HH:mm:ss")).ToArray();
+			var values2 = sensor2Data.Select(t => t.Value).ToArray();
+
+			await JS.InvokeVoidAsync("drawCombinedChart", labels1, values1, labels2, values2);
+		}
+	}
+
+
+
+	public string ParseData(DateTime date)
+	{
+		string day,month,hour,minute,second;
+
+		if (date.Day < 10)
+		{
+			day = "0"+date.Day.ToString();
+		}
+		else{
+			day = date.Day.ToString();
+		}
+
+		if (date.Month < 10)
+		{
+			month = "0" + date.Month.ToString();
+		}
+		else
+		{
+			month = date.Month.ToString();
+		}
+
+		if (date.Hour < 10)
+		{
+			hour = "0" + date.Hour.ToString();
+		}
+		else
+		{
+			hour = date.Hour.ToString();
+		}
+
+		if (date.Minute < 10)
+		{
+			minute = "0" + date.Minute.ToString();
+		}
+		else
+		{
+			minute = date.Minute.ToString();
+		}
+
+		if (date.Second < 10)
+		{
+			second = "0" + date.Second.ToString();
+		}
+		else
+		{
+			second = date.Second.ToString();
+		}
+		return $"{date.Year}-{month}-{day} {hour}:{minute}:{second}";
+	}
+	
+}
