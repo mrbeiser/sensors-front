@@ -411,6 +411,88 @@
           "Value": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg="
         }
       ]
+    },
+    {
+      "Route": "js/sensorScript.js",
+      "AssetFile": "js/sensorScript.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1720"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Jun 2025 10:10:30 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE="
+        }
+      ]
+    },
+    {
+      "Route": "js/sensorScript.kfjmd4z3po.js",
+      "AssetFile": "js/sensorScript.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1720"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Jun 2025 10:10:30 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kfjmd4z3po"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE="
+        },
+        {
+          "Name": "label",
+          "Value": "js/sensorScript.js"
+        }
+      ]
     }
   ]
 }

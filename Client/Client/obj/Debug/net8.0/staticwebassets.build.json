@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lkezqNc1M4t1IEU6Ark7uCNtuJvldJ7TZ9h3nzoRm/M=",
+  "Hash": "jX8TlkfIc6l9YEXkU42Td5UtIhe7Kqlkk1Fp+eFO/dA=",
   "Source": "Client",
   "BasePath": "_content/Client",
   "Mode": "Default",
@@ -141,6 +141,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\uczen\\source\\repos\\sensors-front\\Client\\Client\\wwwroot\\js\\sensorScript.js",
+      "SourceId": "Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\uczen\\source\\repos\\sensors-front\\Client\\Client\\wwwroot\\",
+      "BasePath": "_content/Client",
+      "RelativePath": "js/sensorScript#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kfjmd4z3po",
+      "Integrity": "IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\sensorScript.js"
     }
   ],
   "Endpoints": [
@@ -633,6 +654,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg="
+        }
+      ]
+    },
+    {
+      "Route": "js/sensorScript.js",
+      "AssetFile": "C:\\Users\\uczen\\source\\repos\\sensors-front\\Client\\Client\\wwwroot\\js\\sensorScript.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1720"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Jun 2025 10:10:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE="
+        }
+      ]
+    },
+    {
+      "Route": "js/sensorScript.kfjmd4z3po.js",
+      "AssetFile": "C:\\Users\\uczen\\source\\repos\\sensors-front\\Client\\Client\\wwwroot\\js\\sensorScript.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1720"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Jun 2025 10:10:30 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kfjmd4z3po"
+        },
+        {
+          "Name": "label",
+          "Value": "js/sensorScript.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IEeFrohka6WShJKwdw8L29VsIAEY+zBqct85n6nT8OE="
         }
       ]
     }
